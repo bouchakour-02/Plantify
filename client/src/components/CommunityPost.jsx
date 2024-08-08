@@ -1,6 +1,6 @@
 // src/components/CommunityPost.js
 import React, { useEffect, useState } from 'react';
-import axios from '../../axios';
+import axios from '../axios';
 
 const CommunityPost = () => {
     const [posts, setPosts] = useState([]);

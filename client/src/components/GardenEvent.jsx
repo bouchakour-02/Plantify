@@ -1,6 +1,6 @@
 // src/components/GardenEvent.js
 import React, { useEffect, useState } from 'react';
-import axios from '../../axios';
+import axios from '../axios';
 
 const GardenEvent = () => {
     const [events, setEvents] = useState([]);
