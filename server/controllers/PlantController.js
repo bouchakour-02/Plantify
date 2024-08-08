@@ -1,4 +1,3 @@
-// server/controllers/plantController.js
 const Plant = require('../models/Plant');
 
 exports.createPlant = async (req, res) => {
