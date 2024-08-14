@@ -16,7 +16,7 @@ function App() {
                     <Route path="/login" component={Login} />
                     <ProtectedRoute path="/profile" component={Profile} />
                     <ProtectedRoute path="/create-profile" component={CreateProfile} />
-                    <ProtectedRoute path="/plants" component={Plant} />
+                    <ProtectedRoute path="/plant" component={Plant} />
                     <ProtectedRoute path="/garden-event" component={GardenEvent} />
                     <ProtectedRoute path="/community-post" component={CommunityPost} />
                     <Route path="/" exact component={() => <div>Home Page</div>} />
