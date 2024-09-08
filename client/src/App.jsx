@@ -17,6 +17,8 @@ import Footer from './components/Footer';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import GardenFavoritesSection from './components/GardenBoxSection';
+import CommunityInteraction from "./components/CommunityInteraction";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -42,17 +44,23 @@ function App() {
         <div className="App">
           <TopBar />
           <NavBar />
-          <HeroSection />
-          <FeaturesSection />
-          <GardenFavoritesSection />
           <Routes>
-          
+            <Route
+              path="/"
+              element={
+                <>
+                  <Home />
+                  {/* Only display HeroSection, FeaturesSection, and GardenFavoritesSection on the homepage */}
+                </>
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/create-profile" element={<ProtectedRoute component={CreateProfile} />} />
             <Route path="/plants" element={<ProtectedRoute component={Plant} />} />
             <Route path="/garden-event" element={<ProtectedRoute component={GardenEvent} />} />
             <Route path="/community-post" element={<ProtectedRoute component={CommunityPost} />} />
+            <Route path="/community" element={<CommunityInteraction />} />
           </Routes>
           <Footer />
         </div>
