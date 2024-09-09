@@ -1,33 +1,36 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
-
-function HeroSection() {
+import { Box, Button, Typography, Container, Grid } from '@mui/material';
+import '../hero.css' ; 
+const HeroSection = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '60vh',
-        backgroundColor: '#f9f5f0',
-        color: '#4CAF50',
-        textAlign: 'center',
-        flexDirection: 'column',
-        py: 4,
-      }}
-    >
+    <Box sx={{ backgroundColor: '#f9f5f0', py: 8 }}>
       <Container maxWidth="lg">
-        <Typography variant="h3" component="h1" gutterBottom>
-          PLANTERS FIT FOR EVERY GARDEN
-        </Typography>
-        <Typography variant="h6" component="h2" gutterBottom>
-          Shop Patio Planters & More!
-        </Typography>
-        <Button variant="contained" color="secondary" sx={{ mt: 4 }}>
-      Explore Now        </Button>
+        <Grid container spacing={4} alignItems="center">
+          {/* Left Side: Text Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#2E7D32', mb: 3 }}>
+              20% OFF VERTICAL PLANTERS!
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#4A4A4A', mb: 4 }}>
+              Build Your Dream Space For Less
+            </Typography>
+            <Button variant="contained" color="secondary" sx={{ textTransform: 'none', backgroundColor: '#e76e55' }}>
+              Shop Now
+            </Button>
+          </Grid>
+
+          {/* Right Side: Image Section */}
+          <Grid item xs={12} md={6}>
+            <img
+              src="https://shop.epicgardening.com/cdn/shop/files/EPIC_GARDENING_005224_3450_6e8e09ca-91a2-4504-9f50-3a4034f1cb4a.jpg?v=1724694100&width=1500"
+              alt="Vertical Planters"
+              className="wavy-image"
+            />
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );
-}
+};
 
 export default HeroSection;

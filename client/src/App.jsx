@@ -38,6 +38,7 @@ const theme = createTheme({
 
 function App() {
   return (
+    
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
@@ -55,12 +56,11 @@ function App() {
               }
             />
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-            <Route path="/create-profile" element={<ProtectedRoute component={CreateProfile} />} />
-            <Route path="/plants" element={<ProtectedRoute component={Plant} />} />
-            <Route path="/garden-event" element={<ProtectedRoute component={GardenEvent} />} />
-            <Route path="/community-post" element={<ProtectedRoute component={CommunityPost} />} />
-            <Route path="/community" element={<CommunityInteraction />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/create-profile" element={<CreateProfile />} />
+            <Route path="/plants" element={<Plant />} />
+            <Route path="/garden-event" element={<GardenEvent />} />
+            <Route path="/community-post" element={<CommunityPost />} />
           </Routes>
           <Footer />
         </div>

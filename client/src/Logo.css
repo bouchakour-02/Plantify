@@ -1,43 +1,4 @@
-/* Logo.css */
 .logo-container {
-    display: inline-block;
-    font-family: 'Arial, sans-serif';
-    font-size: px;
-    font-weight: bold;
-    color: #4CAF50; /* Green color */
-    cursor: pointer;
-    overflow: hidden; /* Ensures the hidden text doesn't affect layout */
-    position: relative;
-  }
-  
-  .logo-text {
-    display: inline-block;
-    transition: width 0.5s ease; /* Smooth transition effect */
-    white-space: nowrap;
-    overflow: hidden;
-    width: 24px; /* Only show "P" initially */
-  }
-  
-  .full-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.5s ease; /* Smooth fade-in effect */
-    position: absolute;
-    top: 0;
-    left: 24px; /* Position it right after "P" */
-  }
-  
-  .logo-container:hover .logo-text {
-    width: 100px; /* Expand to fit "Plantify" */
-  }
-  
-  .logo-container:hover .full-text {
-    opacity: 1; /* Fade in the "lantify" part */
-  }
-
-
-  .logo:hover .logo-text {
-    transform: translateX(-15px); /* Adjust to move 'P' left to make room for 'lantify' */
-  }
+  display: inline-block;
+  cursor: pointer;
+}

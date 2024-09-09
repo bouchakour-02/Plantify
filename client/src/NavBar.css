@@ -1,0 +1,48 @@
+.app-bar {
+  background-color: transparent;
+  padding: 10px 0;
+  box-shadow: none;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.menu-button {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #2E7D32; /* Green color to match the style */
+  text-transform: none; /* Prevents uppercase transformation */
+  font-size: 16px; /* Set the font size */
+  margin: 0 15px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.menu-button:hover {
+  color: #1B5E20; /* Darker green on hover */
+  font-weight: bold;
+}
+
+.arrow {
+
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.menu-icons {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icons .MuiIconButton-root {
+  color: #2E7D32;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.menu-icons .MuiIconButton-root:hover {
+  color: #1B5E20;
+}

@@ -1,31 +1,51 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Button, IconButton, Box, Container } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Logo from './Logo';
+import Logo from './Logo'; // Import the Logo component
+import '../NavBar.css'; // Add your CSS here if needed
 
 function NavBar() {
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
+    <AppBar position="static" color="transparent" elevation={0} className="app-bar">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Logo />
-          </Typography>
-          <Button color="inherit">Garden Beds & Supplies</Button>
-          <Button color="inherit">Seed & Plants</Button>
-          <Button color="inherit">Soil Care</Button>
-          <Button color="inherit">Shop Bundles</Button>
-          <Button color="inherit">Featured</Button>
-          <Button color="inherit">Sale</Button>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton color="inherit"><SearchIcon /></IconButton>
-            <IconButton color="inherit"><FavoriteIcon /></IconButton>
-            <IconButton color="inherit"><AccountCircleIcon /></IconButton>
-            <IconButton color="inherit"><ShoppingCartIcon /></IconButton>
+          {/* Logo */}
+          <div className="logo-container">
+            <Logo />
+          </div>
+
+          {/* Menu Items */}
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center'  }}>
+          
+            <Button className="menu-button">
+              Garden Beds & Supplies <span className="arrow">▼</span>
+            </Button>
+            <Button className="menu-button">
+               Plants <span className="arrow">▼</span>
+            </Button>
+            <Button className="menu-button">
+              Soil Care <span className="arrow">▼</span>
+            </Button>
+            <Button className="menu-button">
+            Seeds<span className="arrow">▼</span>
+            </Button>
+            <Button className="menu-button">
+              Featured <span className="arrow">▼</span>
+            </Button>
+            <Button className="menu-button">
+              About us
+            </Button>
+          </Box>
+
+          {/* Icons */}
+          <Box className="menu-icons">
+            <IconButton ><SearchIcon /></IconButton>
+            <IconButton ><FavoriteIcon /></IconButton>
+            <IconButton ><AccountCircleIcon /></IconButton>
+            <IconButton ><ShoppingCartIcon /></IconButton>
           </Box>
         </Toolbar>
       </Container>

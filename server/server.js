@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const plantRoutes = require('./routes/plants');
 const communityRoutes = require('./routes/community');
+const authRoutes = require('./routes/auth');
 dotenv.config();
 
 connectDB();
@@ -13,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ extended: false }));
 
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', authRoutes);
 app.use('/api/profiles', require('./routes/profiles'));
 app.use('/api/plants', require('./routes/plants'));
 app.use('/community', communityRoutes);

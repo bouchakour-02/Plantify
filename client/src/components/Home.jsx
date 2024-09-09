@@ -1,7 +1,8 @@
 import React from 'react';
 import HeroSection from './HeroSection';
 import FeaturesSection from './FeatureSection';
-import GardenFavoritesSection from './GardenBoxSection'; // Add this section if you have one
+import GardenFavoritesSection from './GardenBoxSection';
+import ImageCard from './ImageCard'; // Import the ImageCard component
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
 
       {/* Garden favorites or any other sections */}
       <GardenFavoritesSection />
+
+      {/* Add the ImageCard component here */}
+      
     </div>
   );
 };

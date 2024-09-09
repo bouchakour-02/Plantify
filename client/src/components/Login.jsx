@@ -8,7 +8,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!email || !password) {
+      alert('Please enter both email and password.');
+      return;
+  }
     try {
       const response = await axios.post('/auth/login', {
         email: email.trim(),  // Trim whitespace from email

@@ -1,11 +1,10 @@
 import React from 'react';
-import '/src/Logo.css';
+import logo from '../plantify.png'; // Update this to the correct path of your PNG file
 
 const Logo = () => {
   return (
     <div className="logo-container">
-      <span className="logo-text">P</span>
-      <span className="full-text">lantify</span>
+      <img src={logo} alt="Plantify " style={{ height: '100px', width:'250px'}} /> {/* Adjust height as needed */}
     </div>
   );
 };
