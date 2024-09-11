@@ -1,48 +1,27 @@
-.app-bar {
-  background-color: transparent;
-  padding: 10px 0;
-  box-shadow: none;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
+.menu-button {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2E7D32; /* Green text */
+  text-transform: none;
   margin-right: 20px;
 }
 
-.menu-button {
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
-  color: #2E7D32; /* Green color to match the style */
-  text-transform: none; /* Prevents uppercase transformation */
-  font-size: 16px; /* Set the font size */
-  margin: 0 15px;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.menu-button:hover {
-  color: #1B5E20; /* Darker green on hover */
-  font-weight: bold;
-}
-
 .arrow {
-
-  font-size: 12px;
   margin-left: 5px;
+  font-size: 12px;
 }
 
-.menu-icons {
-  display: flex;
-  align-items: center;
+.MuiMenu-paper {
+  border: 1px solid #2E7D32; /* Border for dropdown */
+  padding: 50px;
 }
 
-.menu-icons .MuiIconButton-root {
-  color: #2E7D32;
-  margin-left: 10px;
-  transition: color 0.3s ease;
+.MuiMenuItem-root {
+  font-size: 14px;
+  padding: 10px 20px;
 }
 
-.menu-icons .MuiIconButton-root:hover {
-  color: #1B5E20;
+img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,0 +1,56 @@
+.video-section {
+    padding: 40px;
+    background-color: #f9f5f0;
+    text-align: center;
+  }
+  
+  .video-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .video-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .video-carousel {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .video-card {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .video-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .video-info {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .video-info p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .video-info span {
+    font-size: 14px;
+    color: #888;
+  }
+  

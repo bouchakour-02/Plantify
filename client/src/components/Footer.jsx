@@ -5,11 +5,11 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
-
+import Logo from './Logo';
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: '#F0F8E7', color: '#4A4A4A', pt: 8, pb: 2, mt: 8 }}>
-      <Container maxWidth="lg">
+    <Box sx={{ backgroundColor: '#99D18F', color: '#4A4A4A', pt: 8, pb: 2, mt: 8 }}>
+      <Container  maxWidth="lg" >
         <Grid container spacing={4}>
           {/* Learn to Grow Section */}
           <Grid item xs={12} md={3}>
@@ -42,7 +42,7 @@ const Footer = () => {
               <IconButton aria-label="Facebook" href="#">
                 <FacebookIcon />
               </IconButton>
-              <IconButton aria-label="Instagram" href="#">
+              <IconButton aria-label="Instagram"  href="#">
                 <InstagramIcon />
               </IconButton>
               <IconButton aria-label="YouTube" href="#">
@@ -55,6 +55,7 @@ const Footer = () => {
                 <PinterestIcon />
               </IconButton>
             </Box>
+            <Logo></Logo>
           </Grid>
 
           {/* Shop Section */}
@@ -100,13 +101,12 @@ const Footer = () => {
         </Grid>
 
         {/* Copyright Section */}
-        <Box sx={{ mt: 4, textAlign: 'center', pb: 2 }}>
+        <Box sx={{ mt: 5, textAlign: 'center', pb: 2 }}>
           <Typography variant="body2" color="textSecondary">
             © 2024, Plantify
           </Typography>
         </Box>
       </Container>
-
       {/* Forest Scene SVG */}
       <Box sx={{ width: '100%', mt: 4 }}>
         <img
