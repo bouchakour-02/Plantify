@@ -5,7 +5,9 @@ import GardenFavoritesSection from './GardenBoxSection';
 import ImageCard from './ImageCard'; // Import the ImageCard component
 import VideoSection  from './VideoSection';
 import footer from './Footer' ; 
-const Home = () => {
+import NavBar from './NavBar';
+import ProductsList from './ProductsList'; // Import the new ProductsList component
+const Home = ({ handleAddToCart, handleAddToWishlist }) => {
   return (
     <div>
       {/* Hero section at the top */}
@@ -19,8 +21,9 @@ const Home = () => {
       {/* Video section */}
       <VideoSection />
       {/* Add the ImageCard component here */}
-       
-    </div>
+           {/* Products list section */}
+           <ProductsList onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} />
+           </div>
   );
 };
 

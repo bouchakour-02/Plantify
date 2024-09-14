@@ -1,82 +1,126 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography, Slider, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import axios from 'axios';
-import ProductCard from './ProductCard'; // Assuming you have a ProductCard component to display each product
+import { Container, Grid, Card, CardContent, Typography, Button, Slider, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import '../Sale.css';  // Include your CSS here
 
-const SalePage = () => {
+const Sale = () => {
   const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState({
-    availability: { inStock: false, outOfStock: false },
-    priceRange: [0, 200],
-  });
+  const [inStock, setInStock] = useState(false);
+  const [outOfStock, setOutOfStock] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 500]);
 
   useEffect(() => {
-    // Fetch sale products from the backend
-    axios.get('/api/products/sale')
-      .then(response => setProducts(response.data))
-      .catch(error => console.error('Error fetching sale products:', error));
-  }, []);
+    fetchSaleProducts();
+  }, [inStock, outOfStock, priceRange]);
 
-  const handleCheckboxChange = (e) => {
-    setFilters({
-      ...filters,
-      availability: { ...filters.availability, [e.target.name]: e.target.checked }
-    });
+  const fetchSaleProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/products/sale', {
+        params: {
+          inStock,
+          outOfStock,
+          minPrice: priceRange[0],
+          maxPrice: priceRange[1],
+        },
+      });
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching sale products:', error);
+    }
   };
 
-  const handlePriceChange = (event, newValue) => {
-    setFilters({
-      ...filters,
-      priceRange: newValue
-    });
+  const handlePriceRangeChange = (event, newValue) => {
+    setPriceRange(newValue);
   };
 
   return (
-    <div>
-      <Typography variant="h2" gutterBottom>Sale</Typography>
+    <Container>
+      <Typography variant="h2" gutterBottom>
+        Sale
+      </Typography>
 
-      {/* Filter Sidebar */}
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
-          <Typography variant="h5">Filter:</Typography>
+      {/* Filter Section */}
+      <div className="filter-product-grid">
+        <div className="filter-section">
+          <Typography variant="h6">Filter:</Typography>
+
+          {/* Stock Availability Filters */}
           <FormGroup>
-            <Typography variant="subtitle1">Availability</Typography>
             <FormControlLabel
-              control={<Checkbox checked={filters.availability.inStock} onChange={handleCheckboxChange} name="inStock" />}
+              control={
+                <Checkbox
+                  checked={inStock}
+                  onChange={() => setInStock(!inStock)}
+                />
+              }
               label="In Stock"
             />
             <FormControlLabel
-              control={<Checkbox checked={filters.availability.outOfStock} onChange={handleCheckboxChange} name="outOfStock" />}
+              control={
+                <Checkbox
+                  checked={outOfStock}
+                  onChange={() => setOutOfStock(!outOfStock)}
+                />
+              }
               label="Out of Stock"
             />
           </FormGroup>
 
-          <Typography variant="subtitle1">Price Range</Typography>
+          {/* Price Range Slider */}
+          <Typography variant="h6" gutterBottom>
+            Price Range
+          </Typography>
           <Slider
-            value={filters.priceRange}
-            onChange={handlePriceChange}
+            value={priceRange}
+            onChange={handlePriceRangeChange}
             valueLabelDisplay="auto"
             min={0}
             max={500}
+            step={10}
+            marks={[
+              { value: 0, label: '$0' },
+              { value: 500, label: '$500' },
+            ]}
           />
-        </Grid>
+        </div>
 
-        {/* Product Grid */}
-        <Grid item xs={9}>
-          <Grid container spacing={3}>
-            {products
-              .filter(product => filters.availability.inStock ? product.inStock : true)
-              .filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1])
-              .map(product => (
-                <Grid item xs={4} key={product._id}>
-                  <ProductCard product={product} />
+        {/* Products Grid Section */}
+        <div className="product-grid-section">
+          <Grid container spacing={4}>
+            {products.length ? (
+              products.map((product) => (
+                <Grid item key={product._id} xs={12} sm={6} md={4}>
+                  <Card>
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      style={{ height: '200px', objectFit: 'cover' }}
+                    />
+                    <CardContent>
+                      <Typography variant="h5" component="h2">
+                        {product.name}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {product.description}
+                      </Typography>
+                      <Typography variant="h6" color="primary">
+                        ${product.price} {product.discount && `(${product.discount}% off)`}
+                      </Typography>
+                      <Button variant="contained" color="primary">
+                        Choose Options
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </Grid>
-              ))}
+              ))
+            ) : (
+              <Typography>No products available in this range</Typography>
+            )}
           </Grid>
-        </Grid>
-      </Grid>
-    </div>
+        </div>
+      </div>
+    </Container>
   );
 };
 
-export default SalePage;
+export default Sale;

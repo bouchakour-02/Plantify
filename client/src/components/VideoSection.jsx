@@ -4,7 +4,8 @@ import '../VideoSection.css'; // Import the CSS for styling
 const VideoSection = () => {
   const videos = [
     {
-      src: "", // Replace with your video URL
+      
+      src: "459222064_8380883581968236_4328062113777510821_n.mp4", // Replace with your video URL
       title: "How to Save Tomato Seeds",
       duration: "01:21",
     },

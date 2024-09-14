@@ -5,20 +5,18 @@ const cors = require('cors');
 const plantRoutes = require('./routes/plants');
 const communityRoutes = require('./routes/community');
 const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/productRoutes');
+
 dotenv.config();
-
 connectDB();
-
 const app = express();
-
 app.use(cors());
 app.use(express.json({ extended: false }));
-
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', require('./routes/profiles'));
 app.use('/api/plants', require('./routes/plants'));
 app.use('/community', communityRoutes);
-
+app.use('/api/products', productRoutes);
 // Test route to check database connection
 app.get('/api/test-db', async (req, res) => {
     try {
@@ -30,5 +28,4 @@ app.get('/api/test-db', async (req, res) => {
     }
 });
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

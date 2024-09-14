@@ -5,7 +5,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Logo from './Logo'; // Import the Logo component
-
+import { Link } from 'react-router-dom'; 
+import Cart from './Cart'; // Import Cart Component
 function NavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [subMenu, setSubMenu] = useState(null);
@@ -13,7 +14,13 @@ function NavBar() {
   const [anchorElBeds, setAnchorElBeds] = useState(null); 
   const [anchorElFeatures, setAnchorElFeatures] = useState(null); 
   const [anchorElTrees, setAnchorElTrees] = useState(null);
-
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]); // Mock cart items
+  const [wishlist, setWishlist] = useState([]);
+   // Add to wishlist function
+   const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+  };
   const handleClickSoilCare = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -53,11 +60,27 @@ function NavBar() {
   const handleCloseTrees = () => {
     setAnchorElTrees(null);
   };
+  // Handle opening and closing cart
+  const handleCartToggle = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
+  // Mock function to add items to the cart
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
   return (
     <AppBar position="static" color="transparent" elevation={0}>
-      <Toolbar>
-        <Logo />
+
+
+       <Toolbar>
+        {/* Logo redirects to home */}
+        <Link to="/">
+          <Logo />
+        </Link>
+
+
+
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
           {/* Garden Beds & Supplies Dropdown */}
           <Button aria-controls="garden-beds-menu" aria-haspopup="true" onClick={handleClickBeds}>
@@ -77,12 +100,12 @@ function NavBar() {
                 <MenuItem onClick={handleCloseBeds}>Elevated Planters</MenuItem>
                 <MenuItem onClick={handleCloseBeds}>Garden Kits</MenuItem>
               </Box>
-              <Box sx={{ padding: '20px' }}>
+              <Box sx={{ padding: '40px' }}>
                 <img
-                  src="https://your-image-link.jpg"
+                  src="https://nextluxury.com/wp-content/uploads/flower-bed-raised-garden-bed-ideas-creatingourfamilygarden.jpg"
                   alt="Garden Beds Best Sellers"
-                  width="150"
-                  height="150"
+                  width="300"
+                  height="300"
                   style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                 />
                 <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
@@ -111,12 +134,12 @@ function NavBar() {
                 <MenuItem onClick={handleCloseSeeds}>Flower Seeds</MenuItem>
                 <MenuItem onClick={handleCloseSeeds}>Live Outdoor Plants</MenuItem>
               </Box>
-              <Box sx={{ padding: '20px' }}>
+              <Box sx={{ padding: '40px' }}>
                 <img
-                  src="https://your-image-link.jpg"
+                  src="https://www.smallfootprintfamily.com/wp-content/uploads/Best-Seed-Companies-for-Heirloom-Non-GMO-Seeds.jpg"
                   alt="Seeds Best Sellers"
-                  width="150"
-                  height="150"
+                  width="300"
+                  height="300"
                   style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                 />
                 <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
@@ -145,12 +168,12 @@ function NavBar() {
                 <MenuItem onClick={handleCloseSoilCare}>Composting</MenuItem>
                 <MenuItem onClick={handleCloseSoilCare}>Organic Fertilizers</MenuItem>
               </Box>
-              <Box sx={{ padding: '20px' }}>
+              <Box sx={{ padding: '40px' }}>
                 <img
-                  src="https://your-image-link.jpg"
+                  src="https://landscapedesignfirm.weebly.com/uploads/1/0/3/0/103097028/published/soil-care-services.jpg?1629458561"
                   alt="Soil Care Best Sellers"
-                  width="150"
-                  height="150"
+                  width="300"
+                  height="300"
                   style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                 />
                 <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
@@ -178,12 +201,12 @@ function NavBar() {
                 <MenuItem onClick={handleCloseFeatures}>Best Sellers</MenuItem>
                 <MenuItem onClick={handleCloseFeatures}>Featured Products</MenuItem>
               </Box>
-              <Box sx={{ padding: '20px' }}>
+              <Box sx={{ padding: '40px' }}>
                 <img
-                  src="https://your-image-link.jpg"
+                  src="https://shop.epicgardening.com/cdn/shop/collections/Screen_Shot_2023-03-07_at_9.42.19_AM.png?height=600&v=1678214149"
                   alt="Features Best Sellers"
-                  width="150"
-                  height="150"
+                  width="300"
+                  height="300"
                   style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                 />
                 <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
@@ -211,12 +234,12 @@ function NavBar() {
                 <MenuItem onClick={handleCloseTrees}>Shade Trees</MenuItem>
                 <MenuItem onClick={handleCloseTrees}>Flowering Trees</MenuItem>
               </Box>
-              <Box sx={{ padding: '20px' }}>
+              <Box sx={{ padding: '40px' }}>
                 <img
-                  src="https://your-image-link.jpg"
+                  src="https://img.freepik.com/premium-photo/young-baby-trees_29092-72.jpg"
                   alt="Trees Best Sellers"
-                  width="150"
-                  height="150"
+                  width="300"
+                  height="300"
                   style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                 />
                 <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
@@ -230,9 +253,16 @@ function NavBar() {
         {/* Icons for Search, Favorites, Account, and Cart */}
         <Box>
           <IconButton><SearchIcon /></IconButton>
-          <IconButton><FavoriteIcon /></IconButton>
+          <IconButton><FavoriteIcon />{wishlist.length}</IconButton>
           <IconButton><AccountCircleIcon /></IconButton>
-          <IconButton><ShoppingCartIcon /></IconButton>
+          <IconButton onClick={handleCartToggle}>
+            <ShoppingCartIcon />
+            </IconButton> {isCartOpen && (
+          <Cart
+            cartItems={cartItems}
+            onClose={handleCartToggle} // Close Cart when clicking the close button
+          />
+        )}
         </Box>
       </Toolbar>
     </AppBar>

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import axios from '../axios';  // Ensure axios is configured with the correct baseURL
 import { Container, Typography, TextField, Button, Box, Link, Grid } from '@mui/material';
 
-const Login = () => {
+  const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,12 +14,13 @@ const Login = () => {
       return;
   }
     try {
-      const response = await axios.post('/auth/login', {
-        email: email.trim(),  // Trim whitespace from email
-        password: password.trim()  // Trim whitespace from password
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,  // Trim whitespace from email
+        password, // Trim whitespace from password
       });
       console.log('Login successful:', response.data);
     } catch (error) {
+      setError('Error logging in: ' + (error.response?.data?.message || error.message));
       console.error('Error logging in:', error);
     }
   };

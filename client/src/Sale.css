@@ -1,0 +1,27 @@
+/* Sale.css */
+
+.filter-product-grid {
+    display: flex;
+  }
+  
+  .filter-section {
+    width: 20%;
+    padding-right: 20px;
+  }
+  
+  .product-grid-section {
+    width: 80%;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
