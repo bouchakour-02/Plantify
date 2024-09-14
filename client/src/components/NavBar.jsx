@@ -17,6 +17,7 @@ function NavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]); // Mock cart items
   const [wishlist, setWishlist] = useState([]);
+  
    // Add to wishlist function
    const handleAddToWishlist = (product) => {
     setWishlist((prevWishlist) => [...prevWishlist, product]);

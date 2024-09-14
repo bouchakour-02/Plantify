@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from '../axios';  // Ensure axios is configured with the correct baseURL
 import { Container, Typography, TextField, Button, Box, Link, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
   const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState(null); // Define setUser using useState
+  const navigate =useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -19,6 +21,16 @@ import { Container, Typography, TextField, Button, Box, Link, Grid } from '@mui/
         password, // Trim whitespace from password
       });
       console.log('Login successful:', response.data);
+      setUser(response.data.user); // Set the user data after successful login
+      localStorage.setItem('token', response.data.token); // Optionally store token in localStorage
+      const isAdmin = email === 'admin@example.com';  // Change this to the actual check
+      setUser({ email, isAdmin });
+
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       setError('Error logging in: ' + (error.response?.data?.message || error.message));
       console.error('Error logging in:', error);

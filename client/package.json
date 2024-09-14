@@ -19,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.26.0",
-    "react-rte": "^0.16.5"
+    "react-rte": "^0.16.5",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
