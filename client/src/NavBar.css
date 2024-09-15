@@ -5,7 +5,9 @@
   text-transform: none;
   margin-right: 20px;
 }
-
+.navbar-link {
+  font-weight: bold;
+}
 .arrow {
   margin-left: 5px;
   font-size: 12px;

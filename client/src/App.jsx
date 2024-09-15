@@ -15,10 +15,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import SalePage from './components/SalePage';
 import Cart from './components/Cart';
-import ProductList from './components/ProductsList';
+import ProductsList from './components/ProductsList';
 import AdminDashboard from './components/AdminDashboard';
-import Sidebar from './components/Sidebar'; // Admin Sidebar
+import Sidebar from './components/AdminSidebar'; // Admin Sidebar
 import ProtectedRoute from './components/ProtectedRoute';
+import StripeContainer from './components/StripeContainer';
+import SearchResults from './components/SearchResults';
+import WeatherComponent from './components/weatherComponent';
+import About from './components/About';
+
 
 const App = () => {
   const [user, setUser] = useState(null); // User state with admin flag
@@ -56,6 +61,20 @@ const App = () => {
     alert('You have been logged out.');  // Optional: Display a message
   };
 
+  const handleAddToCart = (product) => {
+    const updatedCart = [...cartItems, product];
+    setCartItems(updatedCart);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    alert(`${product.name} added to cart!`);
+  };
+
+  const handleAddToWishlist = (product) => {
+    const updatedWishlist = [...wishlist, product];
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    alert(`${product.name} added to wishlist!`);
+  };
+
   // Show loading indicator while checking for login state
   if (loading) {
     return <div>Loading...</div>;
@@ -64,6 +83,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      
+      {user && user.isAdmin ? <Sidebar /> : <TopBar />}
       <Router>
         {/* Always show NavBar and Footer */}
         <NavBar
@@ -72,27 +93,34 @@ const App = () => {
           toggleCart={() => setIsCartOpen(!isCartOpen)}
           wishlistItems={wishlist} // Pass wishlist items to NavBar
         />
+        
         <div className="App">
           {/* Conditional rendering of admin Sidebar */}
-          {user && user.isAdmin ? <Sidebar /> : <TopBar />}
-          
+        
+         
           <Routes>
             {/* Public Routes: These can be accessed without login */}
             <Route path="/" element={<Home />} />
             <Route path="/sale" element={<SalePage />} />
-            <Route path="/products" element={<ProductList products={[]} onAddToCart={() => {}} onAddToWishlist={() => {}} />} />
+
+
+            <Route 
+            path="/products" 
+            element={<ProductsList 
+            onAddToCart={handleAddToCart} 
+            onAddToWishlist={handleAddToWishlist} />} />
+           
+           
+           <Route path="/about" element={<About />} />
             <Route path="/community-post" element={<CommunityPost />} />
             <Route path="/plants" element={<Plant />} />
             <Route path="/garden-event" element={<GardenEvent />} />
-
+            <Route path="/checkout" element={<StripeContainer />} />
             {/* Restricted Routes: These require login */}
             <Route path="/profile" element={<ProtectedRoute component={Profile} isLoggedIn={isLoggedIn} />} />
             <Route path="/create-profile" element={<CreateProfile />} />
-            <Route
-              path="/admin"
-              element={<ProtectedRoute component={AdminDashboard} isLoggedIn={isLoggedIn} />}
-            />
-
+            <Route path="/admin" element={<ProtectedRoute component={AdminDashboard} isLoggedIn={isLoggedIn} />} />
+            <Route path="/search" element={<SearchResults />} />
             {/* Login Route: Available to everyone */}
             <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
 

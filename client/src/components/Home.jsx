@@ -6,13 +6,14 @@ import ImageCard from './ImageCard'; // Import the ImageCard component
 import VideoSection  from './VideoSection';
 import footer from './Footer' ; 
 import NavBar from './NavBar';
+import WeatherComponent from './weatherComponent';
 import ProductsList from './ProductsList'; // Import the new ProductsList component
-const Home = ({ handleAddToCart, handleAddToWishlist }) => {
+const Home = ({ onAddToCart, onAddToWishlist }) => {
   return (
     <div>
       {/* Hero section at the top */}
       <HeroSection />
-
+     
       {/* Features section */}
       <FeaturesSection />
 
@@ -20,9 +21,10 @@ const Home = ({ handleAddToCart, handleAddToWishlist }) => {
       <GardenFavoritesSection />
       {/* Video section */}
       <VideoSection />
+      <WeatherComponent />
       {/* Add the ImageCard component here */}
            {/* Products list section */}
-           <ProductsList onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} />
+           <ProductsList onAddToCart={onAddToCart} onAddToWishlist={onAddToWishlist} />
            </div>
   );
 };

@@ -10,17 +10,17 @@ const VideoSection = () => {
       duration: "01:21",
     },
     {
-      src: "",
+      src: "nawara-1.mp4",
       title: "Did you know you can grow the same?",
       duration: "00:58",
     },
     {
-      src: "",
+      src: "nawara-2.mp4",
       title: "Looks amazing",
       duration: "00:33",
     },
     {
-      src: "",
+      src: "nawara-3.mp4",
       title: "More Gardening Tips",
       duration: "00:39",
     },

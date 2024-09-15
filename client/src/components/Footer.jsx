@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Box, Container, Grid, Typography, TextField, Button, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -6,7 +7,21 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import Logo from './Logo';
+import  { useState } from 'react';
 const Footer = () => {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/send-email', { email });
+      alert('Thank you for subscribing!');
+      setEmail(''); // Clear the input after sending
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to subscribe. Please try again later.');
+    }
+  };
   return (
     <Box sx={{ backgroundColor: '#99D18F', color: '#4A4A4A', pt: 8, pb: 2, mt: 8 }}>
       <Container  maxWidth="lg" >
@@ -25,9 +40,10 @@ const Footer = () => {
                 variant="standard"
                 size="small"
                 fullWidth
-                InputProps={{
-                  disableUnderline: true,
-                }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                InputProps={{ disableUnderline: true }}
+                required
               />
               <Button
                 variant="contained"

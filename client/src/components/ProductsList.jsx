@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../ProductList.css'; // Make sure to link the improved CSS
+import PropTypes from 'prop-types'; // Import PropTypes
 
-const ProductList = ({  onAddToCart, onAddToWishlist }) => {
+const ProductsList = ({ onAddToCart, onAddToWishlist }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +11,9 @@ const ProductList = ({  onAddToCart, onAddToWishlist }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        console.log("Making API request to /api/products");
         const response = await axios.get('http://localhost:5000/api/products'); // Adjust the API URL as needed
+        console.log(response.data); 
         setProducts(response.data);
         setLoading(false);
       } catch (err) {
@@ -63,8 +66,13 @@ const ProductList = ({  onAddToCart, onAddToWishlist }) => {
         )}
       </div>
     </div>
-    
   );
 };
 
-export default ProductList;
+// Define PropTypes
+ProductsList.propTypes = {
+  onAddToCart: PropTypes.func.isRequired, // Function type and required
+  onAddToWishlist: PropTypes.func.isRequired // Function type and required
+};
+
+export default ProductsList;

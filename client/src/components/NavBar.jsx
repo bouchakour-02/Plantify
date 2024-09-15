@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Button, Box, Menu, MenuItem, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Button, Box, Menu, MenuItem, IconButton, Typography, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -18,14 +18,16 @@ const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogou
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]); // Mock cart items
   const [wishlist, setWishlist] = useState([]);
-  
+  const [searchQuery, setSearchQuery] = useState(''); // Define searchQuery state
   const navigate = useNavigate(); // Use navigate for redirection
 
   // Handle opening and closing cart
   const handleCartToggle = () => {
     setIsCartOpen(!isCartOpen);
   };
-
+  const handleClickAbout = () => {
+    navigate('/about');
+  };
   // Handle logout action
   const handleLogout = () => {
     onLogout(); // Call the logout handler passed as prop
@@ -36,7 +38,16 @@ const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogou
   const handleAddToWishlist = (product) => {
     setWishlist((prevWishlist) => [...prevWishlist, product]);
   };
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${searchQuery}`); // Navigate to the search page with the query
+    }
+  };
   // Dropdown handlers
   const handleClickSeeds = (event) => {
     setAnchorElSeeds(event.currentTarget);
@@ -208,42 +219,25 @@ const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogou
           </Menu>
 
           {/* Trees Dropdown */}
-          <Button aria-controls="trees-menu" aria-haspopup="true" onClick={handleClickTrees}>
-            Trees <span className="arrow">▼</span>
+          <Button aria-controls="trees-menu" aria-haspopup="true" onClick={handleClickAbout}>
+            About <span className="arrow"></span>
           </Button>
-          <Menu
-            id="trees-menu"
-            anchorEl={anchorElTrees}
-            open={Boolean(anchorElTrees)}
-            onClose={handleCloseTrees}
-            sx={{ display: 'flex' }}
-          >
-            <Box sx={{ display: 'flex' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', padding: '20px', minWidth: '200px' }}>
-                <MenuItem onClick={handleCloseTrees}><b>Trees</b></MenuItem>
-                <MenuItem onClick={handleCloseTrees}>Fruit Trees</MenuItem>
-                <MenuItem onClick={handleCloseTrees}>Shade Trees</MenuItem>
-                <MenuItem onClick={handleCloseTrees}>Flowering Trees</MenuItem>
-              </Box>
-              <Box sx={{ padding: '40px' }}>
-                <img
-                  src="https://img.freepik.com/premium-photo/young-baby-trees_29092-72.jpg"
-                  alt="Trees Best Sellers"
-                  width="300"
-                  height="300"
-                  style={{ borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
-                />
-                <Button sx={{ display: 'block', marginTop: '10px', color: '#2E7D32' }}>
-                  Shop Best Sellers
-                </Button>
-              </Box>
-            </Box>
-          </Menu>
+         
         </Box>
 
         {/* Icons for Search, Favorites, Account, and Cart */}
         <Box>
-          <IconButton><SearchIcon /></IconButton>
+        <Box component="form" onSubmit={handleSearchSubmit} sx={{ display: 'flex', alignItems: 'center' }}>
+          <InputBase
+            placeholder="Search…"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            sx={{ color: 'inherit', marginRight: 2 }}
+          />
+          <IconButton type="submit" sx={{ color: 'inherit' }}>
+            <SearchIcon />
+          </IconButton>
+        
           <IconButton><FavoriteIcon />{wishlist.length}</IconButton>
           <IconButton><AccountCircleIcon /></IconButton>
           <IconButton onClick={handleCartToggle}>
@@ -261,7 +255,7 @@ const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogou
             </Link>
           )}
         </Box>
-
+        </Box>
         {/* Cart Component */}
         {isCartOpen && (
           <Cart

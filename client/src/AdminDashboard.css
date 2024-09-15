@@ -1,22 +1,81 @@
-.admin-dashboard {
-    padding: 20px;
-  }
-  
-  .dashboard-card {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .dashboard-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .sidebar {
-    background-color: #2E7D32; /* Customize your color here */
-    color: #fff;
-  }
-  
+/* AdminDashboard.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial, sans-serif';
+  background-color: #f4f4f4;
+}
+
+/* Sidebar styles */
+.MuiDrawer-paper {
+  background-color: #2f3e46; /* Darker color for the sidebar */
+  color: white;
+  transition: width 0.3s ease; /* Smooth transition for open/close */
+  overflow-x: hidden;
+}
+
+.sidebar-closed {
+  width: 70px !important; /* Closed state width */
+}
+
+.sidebar-open {
+  width: 240px !important; /* Open state width */
+}
+
+.sidebar-header {
+  padding: 16px;
+  text-align: center;
+  background-color: #354f52; /* Dark header */
+}
+
+.sidebar-header img {
+  border-radius: 50%;
+}
+
+.sidebar-header h6 {
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+.MuiButton-root {
+  background-color: #84a98c;
+  color: white;
+}
+
+.MuiButton-root:hover {
+  background-color: #52796f;
+}
+
+/* Main content area */
+.main-content {
+  background-color: #edf2f4;
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Smooth transition when sidebar is toggled */
+}
+
+.main-content-expanded {
+  margin-left: 240px; /* Sidebar expanded state */
+}
+
+.main-content-collapsed {
+  margin-left: 70px; /* Sidebar collapsed state */
+}
+
+/* Charts and paper */
+.MuiPaper-root {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.MuiTypography-h6 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* For smoother transitions in chart containers */
+.recharts-responsive-container {
+  width: 100%;
+  height: 300px;
+}

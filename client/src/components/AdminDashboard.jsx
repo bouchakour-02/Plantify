@@ -1,8 +1,9 @@
-import React from 'react';
-import { Box, Grid, Paper, Typography } from '@mui/material';
-import Sidebar from './Sidebar';
+import React, { useState } from 'react';
+import { Box, Grid, Paper, Typography, IconButton } from '@mui/material';
+import Sidebar from './AdminSidebar';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import '../AdminDashboard.css'; // Add custom styles if needed
+import MenuIcon from '@mui/icons-material/Menu';
+import '../AdminDashboard.css'; // Custom styles for smooth transitions
 
 const data = [
   { name: 'Jan', Sales: 400 },
@@ -20,21 +21,34 @@ const data = [
 ];
 
 const AdminDashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar open by default
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle open/close state
+  };
+
   return (
     <Box display="flex">
-      <Sidebar />
-      <Box component="main" flexGrow={1} p={3}>
+      {/* Sidebar with smooth transition */}
+      <Sidebar isOpen={isSidebarOpen} onLogout={() => console.log('Logout')} />
+
+      <Box component="main" className={isSidebarOpen ? 'main-content-expanded' : 'main-content-collapsed'}>
+        <IconButton onClick={toggleSidebar} sx={{ mb: 2 }}>
+          <MenuIcon />
+        </IconButton>
+
         <Grid container spacing={3}>
+          {/* Sales by Country */}
           <Grid item xs={12}>
             <Typography variant="h5">Sales by Country</Typography>
             <Paper>
               <Box p={2}>
-                {/* Add your country sales data here */}
                 <Typography>Country Sales Data goes here</Typography>
               </Box>
             </Paper>
           </Grid>
 
+          {/* Website Views Chart */}
           <Grid item xs={12} md={6}>
             <Paper>
               <Box p={2}>
@@ -53,6 +67,7 @@ const AdminDashboard = () => {
             </Paper>
           </Grid>
 
+          {/* Daily Sales Chart */}
           <Grid item xs={12} md={6}>
             <Paper>
               <Box p={2}>
