@@ -1,36 +1,47 @@
 import React, { useState } from 'react';
 import axios from '../axios';  // Ensure axios is configured with the correct baseURL
-import { Container, Typography, TextField, Button, Box, Link, Grid } from '@mui/material';
+import { Container, Typography, TextField, Button, Box, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-  const Login = () => {
+const Login = ({ setIsLoggedIn, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(null); // Define setUser using useState
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       alert('Please enter both email and password.');
       return;
-  }
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
-        email,  // Trim whitespace from email
-        password, // Trim whitespace from password
+        email: email.trim(),  // Trim whitespace from email
+        password: password.trim(), // Trim whitespace from password
       });
+      
       console.log('Login successful:', response.data);
-      setUser(response.data.user); // Set the user data after successful login
-      localStorage.setItem('token', response.data.token); // Optionally store token in localStorage
-      const isAdmin = email === 'admin@example.com';  // Change this to the actual check
-      setUser({ email, isAdmin });
 
+      // Set the user data and token after successful login
+      setUser(response.data.user); // Assuming user info is sent back in response
+      localStorage.setItem('token', response.data.token); // Store token in localStorage
+      localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user in localStorage
+
+      // Check if the user is admin
+      const isAdmin = response.data.user.isAdmin;
+
+      // Set global login state in App
+      setIsLoggedIn(true);
+
+      // Navigate to different routes based on admin status
       if (isAdmin) {
         navigate('/admin');
       } else {
         navigate('/');
       }
+
     } catch (error) {
       setError('Error logging in: ' + (error.response?.data?.message || error.message));
       console.error('Error logging in:', error);
@@ -92,6 +103,7 @@ import { useNavigate } from 'react-router-dom';
           Create account
         </Link>
       </Box>
+      {error && <Typography color="error">{error}</Typography>}
     </Container>
   );
 };

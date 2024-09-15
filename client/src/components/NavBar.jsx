@@ -5,9 +5,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Logo from './Logo'; // Import the Logo component
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import Cart from './Cart'; // Import Cart Component
-function NavBar() {
+
+const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogout as props
   const [anchorEl, setAnchorEl] = useState(null);
   const [subMenu, setSubMenu] = useState(null);
   const [anchorElSeeds, setAnchorElSeeds] = useState(null); 
@@ -18,69 +19,58 @@ function NavBar() {
   const [cartItems, setCartItems] = useState([]); // Mock cart items
   const [wishlist, setWishlist] = useState([]);
   
-   // Add to wishlist function
-   const handleAddToWishlist = (product) => {
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
-  };
-  const handleClickSoilCare = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const navigate = useNavigate(); // Use navigate for redirection
 
-  const handleClickSeeds = (event) => {
-    setAnchorElSeeds(event.currentTarget);
-  };
-
-  const handleClickBeds = (event) => {
-    setAnchorElBeds(event.currentTarget);
-  };
-
-  const handleClickFeatures = (event) => {
-    setAnchorElFeatures(event.currentTarget);
-  };
-
-  const handleClickTrees = (event) => {
-    setAnchorElTrees(event.currentTarget);
-  };
-
-  const handleCloseSoilCare = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCloseSeeds = () => {
-    setAnchorElSeeds(null);
-  };
-
-  const handleCloseBeds = () => {
-    setAnchorElBeds(null);
-  };
-
-  const handleCloseFeatures = () => {
-    setAnchorElFeatures(null);
-  };
-
-  const handleCloseTrees = () => {
-    setAnchorElTrees(null);
-  };
   // Handle opening and closing cart
   const handleCartToggle = () => {
     setIsCartOpen(!isCartOpen);
   };
 
-  // Mock function to add items to the cart
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+  // Handle logout action
+  const handleLogout = () => {
+    onLogout(); // Call the logout handler passed as prop
+    navigate('/login'); // Redirect to login page
   };
+
+  // Add to wishlist function
+  const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+  };
+
+  // Dropdown handlers
+  const handleClickSeeds = (event) => {
+    setAnchorElSeeds(event.currentTarget);
+  };
+  
+  const handleClickBeds = (event) => {
+    setAnchorElBeds(event.currentTarget);
+  };
+  
+  const handleClickFeatures = (event) => {
+    setAnchorElFeatures(event.currentTarget);
+  };
+  
+  const handleClickTrees = (event) => {
+    setAnchorElTrees(event.currentTarget);
+  };
+  const handleClickSoilCare = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseSoilCare = () => {
+    setAnchorEl(null);
+  };
+  const handleCloseSeeds = () => setAnchorElSeeds(null);
+  const handleCloseBeds = () => setAnchorElBeds(null);
+  const handleCloseFeatures = () => setAnchorElFeatures(null);
+  const handleCloseTrees = () => setAnchorElTrees(null);
+
   return (
     <AppBar position="static" color="transparent" elevation={0}>
-
-
-       <Toolbar>
+      <Toolbar>
         {/* Logo redirects to home */}
         <Link to="/">
           <Logo />
         </Link>
-
-
 
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
           {/* Garden Beds & Supplies Dropdown */}
@@ -258,13 +248,27 @@ function NavBar() {
           <IconButton><AccountCircleIcon /></IconButton>
           <IconButton onClick={handleCartToggle}>
             <ShoppingCartIcon />
-            </IconButton> {isCartOpen && (
+          </IconButton>
+
+          {/* Conditional rendering for Login/Logout */}
+          {isLoggedIn ? (
+            <Button onClick={handleLogout} variant="contained" color="secondary">
+              Logout
+            </Button>
+          ) : (
+            <Link to="/login">
+              <Button variant="contained" color="primary">Login</Button>
+            </Link>
+          )}
+        </Box>
+
+        {/* Cart Component */}
+        {isCartOpen && (
           <Cart
             cartItems={cartItems}
             onClose={handleCartToggle} // Close Cart when clicking the close button
           />
         )}
-        </Box>
       </Toolbar>
     </AppBar>
   );
