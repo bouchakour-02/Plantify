@@ -31,7 +31,7 @@ const ProductsList = ({ onAddToCart, onAddToWishlist }) => {
 
   return (
     <div className="product-list-container">
-      <h2>Fall Seed Starting Supplies</h2>
+      <h2>Favorite Supplies</h2>
       <div className="product-grid">
         {products.length > 0 ? (
           products.map((product) => (

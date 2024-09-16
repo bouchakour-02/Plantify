@@ -98,9 +98,9 @@ const NavBar = ({ isLoggedIn, onLogout }) => {  // Accept isLoggedIn and onLogou
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: 'flex', flexDirection: 'column', padding: '20px', minWidth: '200px' }}>
                 <MenuItem onClick={handleCloseBeds}><b>Garden Beds</b></MenuItem>
-                <MenuItem onClick={handleCloseBeds}>Raised Garden Beds</MenuItem>
-                <MenuItem onClick={handleCloseBeds}>Elevated Planters</MenuItem>
-                <MenuItem onClick={handleCloseBeds}>Garden Kits</MenuItem>
+                <MenuItem onClick={() => navigate('/garden-beds/raised')}>Raised Garden Beds</MenuItem>
+                <MenuItem onClick={() => navigate('/garden-beds/elevated')}>Elevated Planters</MenuItem>
+                <MenuItem onClick={() => navigate('/garden-beds/kits')}>Garden Kits</MenuItem>
               </Box>
               <Box sx={{ padding: '40px' }}>
                 <img

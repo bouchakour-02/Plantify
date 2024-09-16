@@ -1,4 +1,5 @@
 .product-list-container {
+  width: 100%;
   padding: 20px;
 }
 
@@ -18,21 +19,23 @@
   width: 250px;
   text-align: center;
   position: relative;
+  justify-content: space-between;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 60px 150px rgba(0, 0, 0, 0.2);
 }
 
 .product-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;
+  object-fit: block;
 }
 
 .product-info {
   padding: 20px;
+  text-align: center;
 }
 
 .product-info h3 {
@@ -72,7 +75,7 @@
   height: 20px;
   border-radius: 50%;
   margin-right: 5px;
-  border: 2px solid #ddd;
+  border: 2px solid #000000;
   cursor: pointer;
 }
 
