@@ -65,6 +65,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+      {user && user.isAdmin ? <Sidebar /> : <TopBar />}
         {/* Always show NavBar and Footer */}
         <NavBar
           isLoggedIn={isLoggedIn}
@@ -74,7 +75,7 @@ const App = () => {
         />
         <div className="App">
           {/* Conditional rendering of admin Sidebar */}
-          {user && user.isAdmin ? <Sidebar /> : <TopBar />}
+          
           
           <Routes>
             {/* Public Routes: These can be accessed without login */}

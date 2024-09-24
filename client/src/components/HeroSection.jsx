@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, Button, Typography, Container, Grid } from '@mui/material';
 import '../hero.css' ; 
+
+
+
 const HeroSection = () => {
   return (
     <Box sx={{ backgroundColor: '#f9f5f0', py: 8 }}>
@@ -14,7 +17,7 @@ const HeroSection = () => {
             <Typography variant="body1" sx={{ color: '#4A4A4A', mb: 4 }}>
               Build Your Dream Space For Less
             </Typography>
-            <Button variant="contained" color="secondary" sx={{ textTransform: 'none', backgroundColor: '#e76e55' }}>
+            <Button variant="contained"  color="secondary" sx={{ textTransform: 'none', backgroundColor: '#e76e55' }}>
               Shop Now
             </Button>
           </Grid>
